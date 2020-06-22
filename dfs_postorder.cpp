@@ -5,19 +5,18 @@ FIFO
 Algorithm.
 
 
-add root node to queue
-while (queue not empty) {
-    first = queue.frst
-    visited(first)
-    add all childen of first to queue.
-    queue.dequeue()
+for each node in graph if not visited then:
+    push to stack and then mark as visited.
+    push all non-visited children to stack.
+    if there are no non- visited chidren then pop the top .
+    push all non visited children of the current top of stack
 }
 
 
 */
 
 #include <vector>
-#include <queue>
+#include <stack>
 #include <iostream>
 
 using namespace std;
@@ -39,28 +38,33 @@ class Graph {
         }
     }
     
-    void BFS() {
+    void DFS() {
         vector<bool> discovered(adjList.size()+1, false);
-        queue<int> q;
+        stack<int> s;
         int source;
+        int count;
         for(int i=1 ; i < adjList.size(); i++)
         {
             if(discovered[i] == false){ // discovered[6] => segmenation fault!
-                q.push(i);
+                s.push(i);
                 discovered[i] = true;
-                while(!q.empty())
+                while(!s.empty())
                 {
-                    source = q.front();
+                    source = s.top();
+                    count = 0;
+                    // s.pop();
                     for (auto child : adjList[source]){ // adjList[1,,,6] => segmentation fault!!
                         if(!discovered[child]){
-                            q.push(child);
+                            count ++;
+                            s.push(child);
                             discovered[child] = true;
                         }
                     }
-                    cout << q.front() << " ";
-                    q.pop();
+                    if (count == 0){
+                        cout << s.top() << " ";
+                        s.pop();
+                    }
                 }
-
             }
         }
     
@@ -72,17 +76,17 @@ int main()
 {
 	// vector of graph edges as per above diagram
 	vector<Edge> edges = {
-		{1, 2}, {1, 3}, {1, 4}, {2, 5}, {2, 6}, {5, 9},
-		{5, 10}, {4, 7}, {4, 8}, {7, 11}, {7, 12}}; // 1 5 8 10 100
+		{1, 2}, {1, 7}, {1, 8}, {2, 3}, {2, 6}, {3, 4},
+		{3, 5}, {8, 9}, {8, 12}, {9, 10}, {9, 11}}; // 1 5 8 10 100
 		// vertex 0, 13 and 14 are single nodes
 
 
 	// Number of nodes in the graph
-	int N = 15;
+	int N = 12;
 
 	// create a graph from edges
 	Graph graph(edges, N);
-    graph.BFS();
+    graph.DFS();
 
 
 	return 0;
