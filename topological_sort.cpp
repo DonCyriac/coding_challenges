@@ -1,20 +1,3 @@
-/*
-BFS - queue!!
-FIFO
-
-Algorithm.
-
-
-for each node in graph if not visited then:
-    push to stack and then mark as visited.
-    push all non-visited children to stack.
-    if there are no non- visited chidren then pop the top .
-    push all non visited children of the current top of stack
-}
-
-
-*/
-
 #include <vector>
 #include <stack>
 #include <iostream>
@@ -33,34 +16,22 @@ class Graph {
     Graph(vector<Edge>& edges,  int N) {
         adjList.resize(N+1); 
         for (Edge& edge: edges) {
-            // Directed
             adjList[edge.src].push_back(edge.dest);  
         }
     }
     
     void reverse(){
         int N = adjList.size();
-        vector<vector<int>> temp; // [] [] [] [] [] 
+        vector<vector<int>> temp; 
         temp.resize(N+1);
-        
-        for (int src=0; src<N+1; src++) {
+
+        for (int src=0; src<N; src++) {
             for (int i=0; i < adjList[src].size(); i++) {
                 int dest = adjList[src][i];
                 temp[dest].push_back(src);
-                // cout << "Dest=" << dest <<endl;
-                // for(auto vertex: temp[dest])
-                //     cout << vertex << endl;
-
-                cout << "src=" << src << endl;
-                cout << "i=" << i << endl;
-                cout << "adjList[src].size() ==" << adjList[src].size() << endl;
-                    // src = 7
-                    // i= 1
             }
-            cout<<"out";
         }
-        cout << "lfsjdlkfjds";
-        adjList = temp; // wrong!
+        adjList = temp;
     }
 
 
