@@ -48,15 +48,6 @@ class Graph {
             for (int i=0; i < adjList[src].size(); i++) {
                 int dest = adjList[src][i];
                 temp[dest].push_back(src);
-                // cout << "Dest=" << dest <<endl;
-                // for(auto vertex: temp[dest])
-                //     cout << vertex << endl;
-
-                // cout << "src=" << src << endl;
-                // cout << "i=" << i << endl;
-                // cout << "adjList[src].size() ==" << adjList[src].size() << endl;
-                //     // src = 7
-                    // i= 1
             }
             // cout<<"out"<<endl;
         }
@@ -82,8 +73,8 @@ class Graph {
     void topological_sort() {
         int N = adjList.size();
         vector<bool> discovered(N+1, false);
-        // vector<int> leaves;
         vector<int> output;
+        // vector<int> leaves;
         // for(int src = 0; src < N+1; src++){
         //     if( adjList[src].size() == 0)
         //         leaves.push_back(src);

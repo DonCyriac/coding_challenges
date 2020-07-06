@@ -48,6 +48,36 @@ class Graph {
 };
 
 
+
+
+bool check(vector<vector<int>>& graph, vector<int>& discovered, int source, int parent_color) {
+    if(discovered[source] == parent_color) return false;
+
+    if (discovered[source]) return true;
+
+    discovered[source] = (parent_color == 1) ? 2 : 1;
+
+
+    for (auto child: graph[source]) {
+        if (!check(graph, discovered, child, discovered[source])) return false;
+    }
+
+    return true;     
+}
+
+
+
+bool isBipartite(vector<vector<int>>& graph) {
+    vector<int> discovered(graph.size(), 0);
+
+
+}
+
+
+
+
+
+
 int main()
 {
 	// vector of graph edges as per above diagram
